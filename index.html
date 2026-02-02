@@ -38,11 +38,17 @@
                     },
                     animation: {
                         'breathing': 'breathing 2s ease-in-out infinite',
+                        'scroll-right': 'scroll-right 30s linear infinite',
                     },
                     keyframes: {
                         breathing: {
                             '0%, 100%': { transform: 'scale(1)', opacity: '1' },
                             '50%': { transform: 'scale(1.1)', opacity: '0.8' },
+                        },
+                        // Animation to scroll continuously to the right
+                        'scroll-right': {
+                            '0%': { transform: 'translateX(-50%)' },
+                            '100%': { transform: 'translateX(0)' },
                         }
                     }
                 }
@@ -78,6 +84,15 @@
         }
         .dark #preloader {
             background-color: #0f0518;
+        }
+        
+        /* Hide scrollbar for the logo slider */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
     </style>
 </head>
@@ -115,7 +130,6 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
     <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-12">
         <div class="absolute inset-0 z-0 bg-gradient-to-br from-white via-blue-100 to-purple-200 dark:from-[#0f0518] dark:via-[#2e0249] dark:to-[#0f0518]"></div>
 
@@ -145,7 +159,7 @@
 
                 <div id="hero-image-container" class="relative w-full h-full min-h-[400px] flex items-center justify-center" data-aos="fade-left" data-aos-duration="1000">
                     <div class="w-full h-[400px] rounded-2xl overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800" alt="Digital Transformation" class="w-full h-full object-cover">
+                        <img src="./img/whitout ring.svg" alt="Digital Transformation" class="w-full h-full object-cover">
                     </div>
                 </div>
             </div>
@@ -171,7 +185,6 @@
         </div>
     </section>
 
-    <!-- WHAT WE DO -->
     <section class="py-20 bg-white dark:bg-brand-dark">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12" data-aos="fade-up">
@@ -215,7 +228,6 @@
         </div>
     </section>
 
-    <!-- WHY CAREATOR -->
     <section class="py-20 bg-gray-50 dark:bg-[#0b0212]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
@@ -265,7 +277,6 @@
         </div>
     </section>
 
-    <!-- ABOUT CAREATOR / OUR GROWTH STORY -->
     <section id="about" class="py-20 bg-white dark:bg-brand-dark">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16" data-aos="fade-up">
@@ -282,7 +293,6 @@
                 </p>
             </div>
             
-            <!-- Growth Timeline -->
             <div class="mb-20">
                 <h3 class="text-2xl font-bold text-center text-gray-900 dark:text-white mb-12 font-display">Our Growth Story</h3>
                 <div class="relative">
@@ -324,7 +334,6 @@
                 </div>
             </div>
 
-            <!-- Global Presence -->
             <div data-aos="fade-up">
                 <h3 class="text-2xl font-bold text-center text-gray-900 dark:text-white mb-12 font-display">Our Global Presence</h3>
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -349,7 +358,6 @@
         </div>
     </section>
 
-    <!-- SOLUTIONS -->
     <section id="solutions" class="py-20 bg-gray-50 dark:bg-[#0b0212]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12" data-aos="fade-up">
@@ -358,7 +366,6 @@
             </div>
 
             <div class="grid md:grid-cols-2 gap-8 mb-16">
-                <!-- Enterprise Platforms (SAP) -->
                 <div class="bg-white dark:bg-gray-900 p-10 rounded-xl shadow-lg hover:shadow-2xl transition-all border-l-4 border-hero-blue" data-aos="fade-up">
                     <div class="flex items-start justify-between mb-6">
                         <h3 class="text-2xl font-bold text-gray-900 dark:text-white font-display">Enterprise Platforms</h3>
@@ -384,7 +391,6 @@
                     </ul>
                 </div>
                 
-                <!-- Data & AI -->
                 <div class="bg-white dark:bg-gray-900 p-10 rounded-xl shadow-lg hover:shadow-2xl transition-all border-l-4 border-hero-green" data-aos="fade-up" data-aos-delay="100">
                     <div class="flex items-start justify-between mb-6">
                         <h3 class="text-2xl font-bold text-gray-900 dark:text-white font-display">Data & AI</h3>
@@ -410,7 +416,6 @@
                     </ul>
                 </div>
                 
-                <!-- Capability Centers (GCC) -->
                 <div class="bg-white dark:bg-gray-900 p-10 rounded-xl shadow-lg hover:shadow-2xl transition-all border-l-4 border-hero-lime" data-aos="fade-up" data-aos-delay="200">
                     <div class="flex items-start justify-between mb-6">
                         <h3 class="text-2xl font-bold text-gray-900 dark:text-white font-display">Capability Centers</h3>
@@ -436,7 +441,6 @@
                     </ul>
                 </div>
                 
-                <!-- Professional Services -->
                 <div class="bg-white dark:bg-gray-900 p-10 rounded-xl shadow-lg hover:shadow-2xl transition-all border-l-4 border-hero-navy" data-aos="fade-up" data-aos-delay="300">
                     <div class="flex items-start justify-between mb-6">
                         <h3 class="text-2xl font-bold text-gray-900 dark:text-white font-display">Professional Services</h3>
@@ -465,7 +469,6 @@
         </div>
     </section>
 
-    <!-- MULTI-DIMENSIONAL TRANSFORMATION -->
     <section id="methodology" class="py-20 bg-white dark:bg-brand-dark overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -517,7 +520,6 @@
         </div>
     </section>
 
-    <!-- SERVICES -->
     <section id="services" class="py-20 bg-gray-50 dark:bg-[#0b0212]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12" data-aos="fade-up">
@@ -579,7 +581,6 @@
         </div>
     </section>
 
-    <!-- INDUSTRIES -->
     <section id="industries" class="py-20 bg-white dark:bg-brand-dark">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12" data-aos="fade-up">
@@ -589,37 +590,49 @@
             
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all border-t-4 border-hero-blue group transform hover:-translate-y-1" data-aos="fade-up">
-                    <div class="text-4xl mb-4">🛒</div>
+                    <div class="mb-4 text-hero-blue dark:text-brand-accent group-hover:scale-110 transition-transform">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                    </div>
                     <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">Retail & Consumer</h3>
                     <p class="text-sm text-gray-600 dark:text-gray-400">SAP retail solutions, supply chain optimization, customer analytics</p>
                 </div>
                 
                 <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all border-t-4 border-hero-green group transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="100">
-                    <div class="text-4xl mb-4">🩺</div>
+                    <div class="mb-4 text-hero-green dark:text-brand-accent group-hover:scale-110 transition-transform">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                    </div>
                     <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">Life Sciences</h3>
                     <p class="text-sm text-gray-600 dark:text-gray-400">Compliance-focused platforms, clinical data analytics, R&D systems</p>
                 </div>
                 
                 <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all border-t-4 border-hero-lime group transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="200">
-                    <div class="text-4xl mb-4">🏭</div>
+                    <div class="mb-4 text-hero-lime dark:text-brand-accent group-hover:scale-110 transition-transform">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                    </div>
                     <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">Manufacturing</h3>
                     <p class="text-sm text-gray-600 dark:text-gray-400">Process modernization, smart manufacturing, IoT integration</p>
                 </div>
                 
                 <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all border-t-4 border-hero-navy group transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="300">
-                    <div class="text-4xl mb-4">💳</div>
+                    <div class="mb-4 text-hero-navy dark:text-brand-accent group-hover:scale-110 transition-transform">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
                     <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">BFSI</h3>
                     <p class="text-sm text-gray-600 dark:text-gray-400">Core banking, risk analytics, regulatory compliance</p>
                 </div>
                 
                 <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all border-t-4 border-brand-accent group transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="400">
-                    <div class="text-4xl mb-4">💻</div>
+                    <div class="mb-4 text-brand-accent group-hover:scale-110 transition-transform">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    </div>
                     <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">Technology</h3>
                     <p class="text-sm text-gray-600 dark:text-gray-400">Platform services, GCC operations, innovation enablement</p>
                 </div>
                 
                 <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all border-t-4 border-hero-blue group transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="500">
-                    <div class="text-4xl mb-4">📡</div>
+                    <div class="mb-4 text-hero-blue dark:text-brand-accent group-hover:scale-110 transition-transform">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"></path></svg>
+                    </div>
                     <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">Telecom</h3>
                     <p class="text-sm text-gray-600 dark:text-gray-400">BSS/OSS modernization, customer experience, network analytics</p>
                 </div>
@@ -627,7 +640,6 @@
         </div>
     </section>
 
-    <!-- CASE STUDIES -->
     <section id="case-studies" class="py-20 bg-gray-50 dark:bg-[#0b0212]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-extrabold font-display text-gray-900 dark:text-white mb-12 text-center">Success Stories</h2>
@@ -661,51 +673,55 @@
         </div>
     </section>
 
-    <!-- CLIENTS -->
-    <section id="clients" class="py-12 bg-gradient-to-r from-hero-navy to-blue-900 text-white border-t border-white/10">
+    <section id="clients" class="py-20 bg-gradient-to-r from-hero-navy to-blue-900 text-white border-t border-white/10 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold mb-4 font-display">Trusted By Global Leaders</h2>
+                <p class="text-gray-300 text-sm mb-6 leading-relaxed">
+                    We partner with industry giants across Retail, Banking, Manufacturing, and Healthcare to deliver transformative results. Our proven track record across 50+ clients and 100+ delivered projects speaks to our reliability and expertise.
+                </p>
                 
-                <div>
-                    <div class="grid grid-cols-6 gap-2 md:gap-3">
-                        <div class="bg-white/10 p-2 rounded flex items-center justify-center h-12 hover:bg-white/20 transition"><img src="./img/cognizant.png" class="max-h-8 opacity-70 hover:opacity-100"></div>
-                        <div class="bg-white/10 p-2 rounded flex items-center justify-center h-12 hover:bg-white/20 transition"><img src="./img/DELOITEE.png" class="max-h-8 opacity-70 hover:opacity-100"></div>
-                        <div class="bg-white/10 p-2 rounded flex items-center justify-center h-12 hover:bg-white/20 transition"><img src="./img/tech mahindra.png" class="max-h-8 opacity-70 hover:opacity-100"></div>
-                        <div class="bg-white/10 p-2 rounded flex items-center justify-center h-12 hover:bg-white/20 transition"><img src="./img/tesco.jpg" class="max-h-8 opacity-70 hover:opacity-100"></div>
-                        <div class="bg-white/10 p-2 rounded flex items-center justify-center h-12 hover:bg-white/20 transition"><img src="./img/brandix.png" class="max-h-8 opacity-70 hover:opacity-100"></div>
-                        <div class="bg-white/10 p-2 rounded flex items-center justify-center h-12 hover:bg-white/20 transition text-xs text-gray-500">CLIENT</div>
-                        
-                        <div class="bg-white/10 p-2 rounded flex items-center justify-center h-12 hover:bg-white/20 transition text-xs text-gray-500">CLIENT</div>
-                        <div class="bg-white/10 p-2 rounded flex items-center justify-center h-12 hover:bg-white/20 transition text-xs text-gray-500">CLIENT</div>
-                        <div class="bg-white/10 p-2 rounded flex items-center justify-center h-12 hover:bg-white/20 transition text-xs text-gray-500">CLIENT</div>
-                        <div class="bg-white/10 p-2 rounded flex items-center justify-center h-12 hover:bg-white/20 transition text-xs text-gray-500">CLIENT</div>
-                        <div class="bg-white/10 p-2 rounded flex items-center justify-center h-12 hover:bg-white/20 transition text-xs text-gray-500">CLIENT</div>
-                        <div class="bg-white/10 p-2 rounded flex items-center justify-center h-12 hover:bg-white/20 transition text-xs text-gray-500">CLIENT</div>
-                    </div>
+                <h3 class="text-lg font-bold mb-3 font-display text-hero-lime">Key Industries</h3>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-semibold flex items-center gap-1"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg> Retail</span>
+                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-semibold flex items-center gap-1"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> BFS</span>
+                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-semibold flex items-center gap-1"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg> Manufacturing</span>
+                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-semibold flex items-center gap-1"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"></path></svg> Telecom</span>
+                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-semibold flex items-center gap-1"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg> Healthcare</span>
+                    <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-semibold flex items-center gap-1"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg> Technology</span>
                 </div>
-
-                <div class="text-left">
-                    <h2 class="text-3xl font-bold mb-4 font-display">Trusted By Global Leaders</h2>
-                    <p class="text-gray-300 text-sm mb-6 leading-relaxed">
-                        We partner with industry giants across Retail, Banking, Manufacturing, and Healthcare to deliver transformative results. Our proven track record across 50+ clients and 100+ delivered projects speaks to our reliability and expertise.
-                    </p>
-                    
-                    <h3 class="text-lg font-bold mb-3 font-display text-hero-lime">Key Industries</h3>
-                    <div class="flex flex-wrap gap-3">
-                        <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-semibold">🛒 Retail</span>
-                        <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-semibold">💳 BFS</span>
-                        <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-semibold">🏭 Manufacturing</span>
-                        <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-semibold">📡 Telecom</span>
-                        <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-semibold">🩺 Healthcare</span>
-                        <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-semibold">💻 Technology</span>
-                    </div>
-                </div>
-
             </div>
+
+            <div class="relative w-full overflow-hidden no-scrollbar">
+                <div class="flex animate-scroll-right hover:pause w-max">
+                    <div class="flex items-center gap-8 mx-4">
+                        <div class="bg-white/10 p-4 rounded-xl flex items-center justify-center w-40 h-20 hover:bg-white/20 transition backdrop-blur-sm"><img src="./img/cognizant.png" class="max-h-12 max-w-full opacity-70 hover:opacity-100 transition-opacity"></div>
+                        <div class="bg-white/10 p-4 rounded-xl flex items-center justify-center w-40 h-20 hover:bg-white/20 transition backdrop-blur-sm"><img src="./img/DELOITEE.png" class="max-h-12 max-w-full opacity-70 hover:opacity-100 transition-opacity"></div>
+                        <div class="bg-white/10 p-4 rounded-xl flex items-center justify-center w-40 h-20 hover:bg-white/20 transition backdrop-blur-sm"><img src="./img/tech mahindra.png" class="max-h-12 max-w-full opacity-70 hover:opacity-100 transition-opacity"></div>
+                        <div class="bg-white/10 p-4 rounded-xl flex items-center justify-center w-40 h-20 hover:bg-white/20 transition backdrop-blur-sm"><img src="./img/tesco.jpg" class="max-h-12 max-w-full opacity-70 hover:opacity-100 transition-opacity"></div>
+                        <div class="bg-white/10 p-4 rounded-xl flex items-center justify-center w-40 h-20 hover:bg-white/20 transition backdrop-blur-sm"><img src="./img/brandix.png" class="max-h-12 max-w-full opacity-70 hover:opacity-100 transition-opacity"></div>
+                        <div class="bg-white/10 p-4 rounded-xl flex items-center justify-center w-40 h-20 hover:bg-white/20 transition backdrop-blur-sm text-gray-400 font-bold">CLIENT LOGO</div>
+                        <div class="bg-white/10 p-4 rounded-xl flex items-center justify-center w-40 h-20 hover:bg-white/20 transition backdrop-blur-sm text-gray-400 font-bold">CLIENT LOGO</div>
+                        <div class="bg-white/10 p-4 rounded-xl flex items-center justify-center w-40 h-20 hover:bg-white/20 transition backdrop-blur-sm text-gray-400 font-bold">CLIENT LOGO</div>
+                    </div>
+                    
+                    <div class="flex items-center gap-8 mx-4">
+                        <div class="bg-white/10 p-4 rounded-xl flex items-center justify-center w-40 h-20 hover:bg-white/20 transition backdrop-blur-sm"><img src="./img/cognizant.png" class="max-h-12 max-w-full opacity-70 hover:opacity-100 transition-opacity"></div>
+                        <div class="bg-white/10 p-4 rounded-xl flex items-center justify-center w-40 h-20 hover:bg-white/20 transition backdrop-blur-sm"><img src="./img/DELOITEE.png" class="max-h-12 max-w-full opacity-70 hover:opacity-100 transition-opacity"></div>
+                        <div class="bg-white/10 p-4 rounded-xl flex items-center justify-center w-40 h-20 hover:bg-white/20 transition backdrop-blur-sm"><img src="./img/tech mahindra.png" class="max-h-12 max-w-full opacity-70 hover:opacity-100 transition-opacity"></div>
+                        <div class="bg-white/10 p-4 rounded-xl flex items-center justify-center w-40 h-20 hover:bg-white/20 transition backdrop-blur-sm"><img src="./img/tesco.jpg" class="max-h-12 max-w-full opacity-70 hover:opacity-100 transition-opacity"></div>
+                        <div class="bg-white/10 p-4 rounded-xl flex items-center justify-center w-40 h-20 hover:bg-white/20 transition backdrop-blur-sm"><img src="./img/brandix.png" class="max-h-12 max-w-full opacity-70 hover:opacity-100 transition-opacity"></div>
+                        <div class="bg-white/10 p-4 rounded-xl flex items-center justify-center w-40 h-20 hover:bg-white/20 transition backdrop-blur-sm text-gray-400 font-bold">CLIENT LOGO</div>
+                        <div class="bg-white/10 p-4 rounded-xl flex items-center justify-center w-40 h-20 hover:bg-white/20 transition backdrop-blur-sm text-gray-400 font-bold">CLIENT LOGO</div>
+                        <div class="bg-white/10 p-4 rounded-xl flex items-center justify-center w-40 h-20 hover:bg-white/20 transition backdrop-blur-sm text-gray-400 font-bold">CLIENT LOGO</div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <!-- INSIGHTS -->
     <section id="insights" class="py-20 bg-white dark:bg-brand-dark">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12" data-aos="fade-up">
@@ -744,7 +760,6 @@
         </div>
     </section>
 
-    <!-- LEADERSHIP POV -->
     <section class="py-20 bg-gray-50 dark:bg-[#0b0212]">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="fade-up">
             <svg class="w-12 h-12 text-hero-blue dark:text-brand-accent mx-auto mb-8" fill="currentColor" viewBox="0 0 24 24">
@@ -758,7 +773,6 @@
         </div>
     </section>
 
-    <!-- CONTACT -->
     <footer id="contact" class="bg-gray-100 dark:bg-[#05010a] pt-20 border-t border-gray-200 dark:border-white/5 transition-colors">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
