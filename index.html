@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careator | SAP, Data & GCC Excellence</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Raleway:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'], // Body Font
+                        display: ['Raleway', 'sans-serif'], // Heading Font
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0f0518',  
+                            light: '#ffffff', 
+                            primary: '#2e0249', 
+                            accent: '#a91079', 
+                        },
+                        hero: {
+                            navy: '#002060',  
+                            blue: '#4472c4',  
+                            green: '#548235', 
+                            lime: '#a9d08e',  
+                        }
+                    },
+                    animation: {
+                        'breathing': 'breathing 2s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        breathing: {
+                            '0%, 100%': { transform: 'scale(1)', opacity: '1' },
+                            '50%': { transform: 'scale(1.1)', opacity: '0.8' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .dark .glass-panel {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .light .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        #preloader {
+            position: fixed;
+            inset: 0;
+            background-color: #ffffff; 
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+        .dark #preloader {
+            background-color: #0f0518;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-brand-dark dark:text-gray-200 antialiased overflow-x-hidden transition-colors duration-300 selection:bg-hero-blue selection:text-white">
+
+    <div id="preloader">
+        <div class="flex flex-col items-center">
+            <img src="https://usercontent.one/wp/careator.com/wp-content/uploads/2022/07/Careator_logo.svg" alt="Loading..." class="w-32 animate-breathing">
+            <p class="mt-4 text-sm font-display font-bold tracking-widest text-gray-500">INITIALIZING...</p>
+        </div>
+    </div>
+
+    <nav class="fixed w-full z-50 transition-all duration-300 glass-panel border-b-0" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <img src="https://usercontent.one/wp/careator.com/wp-content/uploads/2022/07/Careator_logo.svg" alt="CAREATOR" class="w-24 h-auto"/>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="hover:text-hero-blue dark:hover:text-brand-accent px-3 py-2 text-sm font-semibold transition-colors">Home</a>
+                    <a href="#about" class="hover:text-hero-blue dark:hover:text-brand-accent px-3 py-2 text-sm font-semibold transition-colors">About</a>
+                    <a href="#solutions" class="hover:text-hero-blue dark:hover:text-brand-accent px-3 py-2 text-sm font-semibold transition-colors">Solutions</a>
+                    <a href="#services" class="hover:text-hero-blue dark:hover:text-brand-accent px-3 py-2 text-sm font-semibold transition-colors">Services</a>
+                    <a href="#industries" class="hover:text-hero-blue dark:hover:text-brand-accent px-3 py-2 text-sm font-semibold transition-colors">Industries</a>
+                    <a href="#insights" class="hover:text-hero-blue dark:hover:text-brand-accent px-3 py-2 text-sm font-semibold transition-colors">Insights</a>
+                    <a href="#contact" class="bg-hero-blue dark:bg-brand-accent hover:opacity-90 text-white px-5 py-2 rounded-full text-sm font-bold transition-all shadow-lg hover:shadow-xl">Contact Us</a>
+                    
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors focus:outline-none">
+                        <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                        <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-12">
+        <div class="absolute inset-0 z-0 bg-gradient-to-br from-white via-blue-100 to-purple-200 dark:from-[#0f0518] dark:via-[#2e0249] dark:to-[#0f0518]"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center h-full">
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
+                <div class="text-left" data-aos="fade-right" data-aos-duration="1000">
+                    <span class="inline-block py-1 px-3 rounded-full bg-black/10 border border-white/20 text-black dark:text-white text-xs font-bold tracking-widest uppercase mb-6 backdrop-blur-md">
+                        Proven Agency • Focused Services
+                    </span>
+                    <h1 class="text-5xl md:text-6xl font-extrabold text-black dark:text-white mb-6 leading-tight font-display">
+                        Multi-Dimensional <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-hero-lime to-blue-900 dark:from-hero-lime dark:to-white">Transformation</span>
+                    </h1>
+                    <p class="mt-4 text-lg md:text-xl text-gray-800 dark:text-gray-100 max-w-lg leading-relaxed font-light">
+                        Empowering enterprises with SAP S/4HANA, Data Governance, and Global Capability Centers (GCC).
+                    </p>
+                    <div class="mt-8 flex flex-wrap gap-4">
+                        <a href="#contact" class="px-8 py-4 bg-white dark:bg-hero-blue text-hero-navy dark:text-white font-bold rounded-lg hover:bg-gray-100 dark:hover:opacity-90 transition-all shadow-xl transform hover:-translate-y-1">
+                            Talk to an Expert
+                        </a>
+                        <a href="#solutions" class="px-8 py-4 bg-transparent border border-black dark:border-white text-black dark:text-white font-bold rounded-lg hover:bg-white/10 transition-all">
+                            Our Services
+                        </a>
+                    </div>
+                </div>
+
+                <div id="hero-image-container" class="relative w-full h-full min-h-[400px] flex items-center justify-center" data-aos="fade-left" data-aos-duration="1000">
+                    <div class="w-full h-[400px] rounded-2xl overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800" alt="Digital Transformation" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel rounded-2xl p-8 grid grid-cols-2 md:grid-cols-4 gap-8 backdrop-blur-lg border-t border-white/20" data-aos="fade-up" data-aos-delay="200">
+                <div class="text-center border-r border-white/10 last:border-0">
+                    <div class="text-3xl md:text-4xl font-extrabold text-black dark:text-white font-display">50+</div>
+                    <div class="text-xs md:text-sm text-gray-700 dark:text-gray-200 uppercase tracking-wider mt-1 font-bold">Clients Serviced</div>
+                </div>
+                <div class="text-center border-r border-white/10 last:border-0">
+                    <div class="text-3xl md:text-4xl font-extrabold text-black dark:text-white font-display">100+</div>
+                    <div class="text-xs md:text-sm text-gray-700 dark:text-gray-200 uppercase tracking-wider mt-1 font-bold">Projects Delivered</div>
+                </div>
+                <div class="text-center border-r border-white/10 last:border-0">
+                    <div class="text-3xl md:text-4xl font-extrabold text-black dark:text-white font-display">$5 Bn+</div>
+                    <div class="text-xs md:text-sm text-gray-700 dark:text-gray-200 uppercase tracking-wider mt-1 font-bold">Impact Enabled</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-extrabold text-black dark:text-white font-display">10+</div>
+                    <div class="text-xs md:text-sm text-gray-700 dark:text-gray-200 uppercase tracking-wider mt-1 font-bold">Global Ref. Clients</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHAT WE DO -->
+    <section class="py-20 bg-white dark:bg-brand-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-extrabold font-display text-gray-900 dark:text-white">What We Do</h2>
+                <p class="mt-2 text-gray-600 dark:text-gray-400">Instant understanding of our core offerings</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all border-t-4 border-hero-blue group transform hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 text-hero-blue group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 font-display">Enterprise Platforms</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">SAP S/4HANA implementation, migration, and modernization for global enterprises.</p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all border-t-4 border-hero-green group transform hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-4 text-hero-green group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 font-display">Data & AI</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">Data governance, analytics, ML, and AI-powered decision intelligence.</p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all border-t-4 border-hero-lime group transform hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-lime-100 dark:bg-lime-900/30 rounded-lg flex items-center justify-center mb-4 text-hero-green group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 font-display">Capability Centers</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">GCC setup, SAP COE, and scaled delivery operations.</p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all border-t-4 border-hero-navy group transform hover:-translate-y-1">
+                    <div class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center mb-4 text-hero-navy group-hover:scale-110 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 font-display">Professional Services</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">Strategic consulting, program delivery, and enterprise staffing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY CAREATOR -->
+    <section class="py-20 bg-gray-50 dark:bg-[#0b0212]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div data-aos="fade-right">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white font-display mb-6">Why Careator</h2>
+                    <div class="w-20 h-1 bg-hero-green rounded mb-8"></div>
+                    
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-2 h-2 bg-hero-blue rounded-full mt-2"></div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 font-display">Enterprise-Grade Delivery</h3>
+                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Proven track record with Fortune 500 companies across SAP, Data, and GCC initiatives.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-2 h-2 bg-hero-green rounded-full mt-2"></div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 font-display">Advisory-Led Approach</h3>
+                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Strategic consulting mindset combined with hands-on implementation excellence.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-2 h-2 bg-hero-lime rounded-full mt-2"></div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 font-display">Governance & Compliance</h3>
+                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">ISO-certified processes ensuring quality, security, and regulatory compliance.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-2 h-2 bg-hero-navy rounded-full mt-2"></div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 font-display">Global Presence</h3>
+                                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Offices across US, UK, EU, Middle East, and India for seamless delivery.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative" data-aos="fade-left">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800" alt="Why Careator" class="w-full rounded-xl shadow-2xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT CAREATOR / OUR GROWTH STORY -->
+    <section id="about" class="py-20 bg-white dark:bg-brand-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-3xl font-extrabold font-display text-hero-navy dark:text-white">About Careator</h2>
+                <div class="w-20 h-1 bg-hero-green mx-auto mt-4 rounded"></div>
+            </div>
+
+            <div class="mb-20" data-aos="fade-up">
+                <p class="text-xl text-gray-700 dark:text-gray-300 leading-relaxed text-center max-w-4xl mx-auto mb-8">
+                    Careator stands at the intersection of enterprise technology and business transformation. Since 2011, we've been empowering global organizations to navigate complex SAP migrations, harness data intelligence, and build world-class capability centers.
+                </p>
+                <p class="text-gray-600 dark:text-gray-400 leading-relaxed text-center max-w-4xl mx-auto">
+                    Our approach is simple: combine deep technical expertise with strategic advisory to deliver outcomes that matter. We don't just implement technology—we transform how businesses operate, decide, and scale.
+                </p>
+            </div>
+            
+            <!-- Growth Timeline -->
+            <div class="mb-20">
+                <h3 class="text-2xl font-bold text-center text-gray-900 dark:text-white mb-12 font-display">Our Growth Story</h3>
+                <div class="relative">
+                    <div class="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gray-200 dark:bg-gray-700 -translate-y-1/2"></div>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                        <div class="relative pt-8 md:pt-0" data-aos="fade-up" data-aos-delay="0">
+                            <div class="md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-6 h-6 bg-hero-green rounded-full border-4 border-white dark:border-brand-dark z-10 mb-4 md:mb-0 shadow-lg"></div>
+                            <div class="md:absolute md:bottom-full md:left-0 md:w-full md:pb-8 text-center">
+                                <h3 class="text-2xl font-bold text-hero-blue font-display">2011</h3>
+                                <p class="text-sm font-bold text-gray-800 dark:text-gray-200">Company Established</p>
+                                <p class="text-xs text-gray-500">Early client wins</p>
+                            </div>
+                        </div>
+                        <div class="relative pt-8 md:pt-0" data-aos="fade-up" data-aos-delay="100">
+                            <div class="md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-6 h-6 bg-hero-lime rounded-full border-4 border-white dark:border-brand-dark z-10 mb-4 md:mb-0 shadow-lg"></div>
+                            <div class="md:absolute md:top-full md:left-0 md:w-full md:pt-8 text-center">
+                                <h3 class="text-2xl font-bold text-hero-blue font-display">2015</h3>
+                                <p class="text-sm font-bold text-gray-800 dark:text-gray-200">Strategic Staffing</p>
+                                <p class="text-xs text-gray-500">Empaneled with Big 4</p>
+                            </div>
+                        </div>
+                        <div class="relative pt-8 md:pt-0" data-aos="fade-up" data-aos-delay="200">
+                            <div class="md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-6 h-6 bg-hero-green rounded-full border-4 border-white dark:border-brand-dark z-10 mb-4 md:mb-0 shadow-lg"></div>
+                            <div class="md:absolute md:bottom-full md:left-0 md:w-full md:pb-8 text-center">
+                                <h3 class="text-2xl font-bold text-hero-blue font-display">2020</h3>
+                                <p class="text-sm font-bold text-gray-800 dark:text-gray-200">SAP COE Established</p>
+                                <p class="text-xs text-gray-500">35 Clients, 2 Offices</p>
+                            </div>
+                        </div>
+                        <div class="relative pt-8 md:pt-0" data-aos="fade-up" data-aos-delay="300">
+                            <div class="md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-6 h-6 bg-hero-lime rounded-full border-4 border-white dark:border-brand-dark z-10 mb-4 md:mb-0 shadow-lg"></div>
+                            <div class="md:absolute md:top-full md:left-0 md:w-full md:pt-8 text-center">
+                                <h3 class="text-2xl font-bold text-hero-blue font-display">2025</h3>
+                                <p class="text-sm font-bold text-gray-800 dark:text-gray-200">GCC & Data AI</p>
+                                <p class="text-xs text-gray-500">55 Clients, ISO Compliance</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Global Presence -->
+            <div data-aos="fade-up">
+                <h3 class="text-2xl font-bold text-center text-gray-900 dark:text-white mb-12 font-display">Our Global Presence</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl shadow-md">
+                        <div class="text-hero-blue dark:text-brand-accent font-display font-semibold mb-2">INDIA (HQ)</div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Bengaluru • Hyderabad</p>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl shadow-md">
+                        <div class="text-hero-blue dark:text-brand-accent font-display font-semibold mb-2">AMERICAS</div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Delaware, USA • Canada</p>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl shadow-md">
+                        <div class="text-hero-blue dark:text-brand-accent font-display font-semibold mb-2">EUROPE</div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">London, UK • EU</p>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-900 p-6 rounded-xl shadow-md">
+                        <div class="text-hero-blue dark:text-brand-accent font-display font-semibold mb-2">MIDDLE EAST</div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Regional presence</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOLUTIONS -->
+    <section id="solutions" class="py-20 bg-gray-50 dark:bg-[#0b0212]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-extrabold font-display text-gray-900 dark:text-white">Solutions</h2>
+                <p class="mt-2 text-gray-600 dark:text-gray-400">Comprehensive solutions across the enterprise technology landscape</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+                <!-- Enterprise Platforms (SAP) -->
+                <div class="bg-white dark:bg-gray-900 p-10 rounded-xl shadow-lg hover:shadow-2xl transition-all border-l-4 border-hero-blue" data-aos="fade-up">
+                    <div class="flex items-start justify-between mb-6">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white font-display">Enterprise Platforms</h3>
+                        <svg class="w-8 h-8 text-hero-blue flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <ul class="space-y-3 text-gray-600 dark:text-gray-400">
+                        <li class="flex items-start gap-3">
+                            <span class="text-hero-blue mt-1">→</span>
+                            <span>S/4HANA Migration & Implementation</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-hero-blue mt-1">→</span>
+                            <span>SAP BTP & Integration Services</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-hero-blue mt-1">→</span>
+                            <span>Application Management Services (AMS)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-hero-blue mt-1">→</span>
+                            <span>Legacy System Modernization</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Data & AI -->
+                <div class="bg-white dark:bg-gray-900 p-10 rounded-xl shadow-lg hover:shadow-2xl transition-all border-l-4 border-hero-green" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-start justify-between mb-6">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white font-display">Data & AI</h3>
+                        <svg class="w-8 h-8 text-hero-green flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                    </div>
+                    <ul class="space-y-3 text-gray-600 dark:text-gray-400">
+                        <li class="flex items-start gap-3">
+                            <span class="text-hero-green mt-1">→</span>
+                            <span>Data Governance & Quality Management</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-hero-green mt-1">→</span>
+                            <span>Advanced Analytics & BI</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-hero-green mt-1">→</span>
+                            <span>Machine Learning & AI Implementation</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-hero-green mt-1">→</span>
+                            <span>Intelligent Data Foundation</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Capability Centers (GCC) -->
+                <div class="bg-white dark:bg-gray-900 p-10 rounded-xl shadow-lg hover:shadow-2xl transition-all border-l-4 border-hero-lime" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-start justify-between mb-6">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white font-display">Capability Centers</h3>
+                        <svg class="w-8 h-8 text-hero-lime flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                    </div>
+                    <ul class="space-y-3 text-gray-600 dark:text-gray-400">
+                        <li class="flex items-start gap-3">
+                            <span class="text-hero-lime mt-1">→</span>
+                            <span>GCC Setup & Operations</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-hero-lime mt-1">→</span>
+                            <span>SAP Centers of Excellence</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-hero-lime mt-1">→</span>
+                            <span>Data COE Establishment</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-hero-lime mt-1">→</span>
+                            <span>Scaled Delivery Models</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Professional Services -->
+                <div class="bg-white dark:bg-gray-900 p-10 rounded-xl shadow-lg hover:shadow-2xl transition-all border-l-4 border-hero-navy" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-start justify-between mb-6">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white font-display">Professional Services</h3>
+                        <svg class="w-8 h-8 text-hero-navy flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    </div>
+                    <ul class="space-y-3 text-gray-600 dark:text-gray-400">
+                        <li class="flex items-start gap-3">
+                            <span class="text-hero-navy mt-1">→</span>
+                            <span>Transformation Advisory</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-hero-navy mt-1">→</span>
+                            <span>Program & Architecture Delivery</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-hero-navy mt-1">→</span>
+                            <span>Strategic Staffing & Recruitment</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-hero-navy mt-1">→</span>
+                            <span>Change Management</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MULTI-DIMENSIONAL TRANSFORMATION -->
+    <section id="methodology" class="py-20 bg-white dark:bg-brand-dark overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white font-display">Multi-Dimensional Transformation</h2>
+                <p class="mt-4 text-gray-600 dark:text-gray-400">Business outcome focused transformation across four key dimensions.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-green-50 dark:bg-green-900/20 p-8 rounded-2xl border-l-8 border-green-500 shadow-sm hover:shadow-md transition-shadow" data-aos="fade-right">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4 font-display">1. Transformation Advisory</h3>
+                    <ul class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                        <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-green-500 rounded-full"></div>System Study & Assessment</li>
+                        <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-green-500 rounded-full"></div>Enterprise Data Architecture</li>
+                        <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-green-500 rounded-full"></div>Business Process Mapping (BPM)</li>
+                        <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-green-500 rounded-full"></div>Change Management Strategy</li>
+                    </ul>
+                </div>
+
+                <div class="bg-blue-50 dark:bg-blue-900/20 p-8 rounded-2xl border-l-8 border-blue-500 shadow-sm hover:shadow-md transition-shadow" data-aos="fade-left">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4 font-display">2. Technology Transformation</h3>
+                    <ul class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                        <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>AI Enablement (Tools & Implementation)</li>
+                        <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>Data Governance & Intelligent Foundation</li>
+                        <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>Platform Migrations (S/4 HANA)</li>
+                        <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>Business-IT Alignment</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-100 dark:bg-gray-800 p-8 rounded-2xl border-l-8 border-gray-500 shadow-sm hover:shadow-md transition-shadow" data-aos="fade-right">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4 font-display">3. Delivery Transformation</h3>
+                    <ul class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                        <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-gray-500 rounded-full"></div>Operational Excellence & Resilience</li>
+                        <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-gray-500 rounded-full"></div>Shared Services & Factory Models</li>
+                        <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-gray-500 rounded-full"></div>Tools and Automation</li>
+                        <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-gray-500 rounded-full"></div>GCCs (Global Capability Centers)</li>
+                    </ul>
+                </div>
+
+                <div class="bg-pink-50 dark:bg-pink-900/20 p-8 rounded-2xl border-l-8 border-pink-500 shadow-sm hover:shadow-md transition-shadow" data-aos="fade-left">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4 font-display">4. Commercial Transformation</h3>
+                    <ul class="space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                        <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-pink-500 rounded-full"></div>Value-Driven Partnerships</li>
+                        <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-pink-500 rounded-full"></div>Flexible Commercial Constructs</li>
+                        <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-pink-500 rounded-full"></div>Output & Outcome Linked</li>
+                        <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 bg-pink-500 rounded-full"></div>As-a-Service Models</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="py-20 bg-gray-50 dark:bg-[#0b0212]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-extrabold font-display text-gray-900 dark:text-white">Services</h2>
+                <p class="mt-2 text-gray-600 dark:text-gray-400">Comprehensive service offerings designed for enterprise scale</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all border-t-4 border-hero-blue" data-aos="fade-up">
+                    <svg class="w-10 h-10 text-hero-blue mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">IT & Professional Services</h3>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                        <li>• Consulting</li>
+                        <li>• Program Delivery</li>
+                        <li>• Advisory Services</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all border-t-4 border-hero-green" data-aos="fade-up" data-aos-delay="100">
+                    <svg class="w-10 h-10 text-hero-green mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">Application Services</h3>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                        <li>• Application Modernization</li>
+                        <li>• Custom Development</li>
+                        <li>• Integration Services</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all border-t-4 border-hero-lime" data-aos="fade-up" data-aos-delay="200">
+                    <svg class="w-10 h-10 text-hero-lime mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">BI Services</h3>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                        <li>• Dashboards & Reports</li>
+                        <li>• Analytics & Insights</li>
+                        <li>• Data Visualization</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all border-t-4 border-hero-navy" data-aos="fade-up" data-aos-delay="300">
+                    <svg class="w-10 h-10 text-hero-navy mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">Product Development</h3>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                        <li>• Product Strategy</li>
+                        <li>• Build & Scale</li>
+                        <li>• Innovation Labs</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all border-t-4 border-brand-accent" data-aos="fade-up" data-aos-delay="400">
+                    <svg class="w-10 h-10 text-brand-accent mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">Staffing Solutions</h3>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                        <li>• Contract Staffing</li>
+                        <li>• Permanent Placement</li>
+                        <li>• Talent Management</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INDUSTRIES -->
+    <section id="industries" class="py-20 bg-white dark:bg-brand-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-extrabold font-display text-gray-900 dark:text-white">Industries We Serve</h2>
+                <p class="mt-2 text-gray-600 dark:text-gray-400">Deep domain expertise across key enterprise sectors</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all border-t-4 border-hero-blue group transform hover:-translate-y-1" data-aos="fade-up">
+                    <div class="text-4xl mb-4">🛒</div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">Retail & Consumer</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">SAP retail solutions, supply chain optimization, customer analytics</p>
+                </div>
+                
+                <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all border-t-4 border-hero-green group transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-4xl mb-4">🩺</div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">Life Sciences</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Compliance-focused platforms, clinical data analytics, R&D systems</p>
+                </div>
+                
+                <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all border-t-4 border-hero-lime group transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-4xl mb-4">🏭</div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">Manufacturing</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Process modernization, smart manufacturing, IoT integration</p>
+                </div>
+                
+                <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all border-t-4 border-hero-navy group transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-4xl mb-4">💳</div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">BFSI</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Core banking, risk analytics, regulatory compliance</p>
+                </div>
+                
+                <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all border-t-4 border-brand-accent group transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="400">
+                    <div class="text-4xl mb-4">💻</div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">Technology</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Platform services, GCC operations, innovation enablement</p>
+                </div>
+                
+                <div class="bg-gray-50 dark:bg-gray-900 p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all border-t-4 border-hero-blue group transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="500">
+                    <div class="text-4xl mb-4">📡</div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">Telecom</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">BSS/OSS modernization, customer experience, network analytics</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CASE STUDIES -->
+    <section id="case-studies" class="py-20 bg-gray-50 dark:bg-[#0b0212]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-extrabold font-display text-gray-900 dark:text-white mb-12 text-center">Success Stories</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white dark:bg-gray-900 p-6 rounded-xl border-l-4 border-hero-blue hover:shadow-lg transition-all transform hover:-translate-y-1">
+                    <p class="text-xs text-hero-blue font-bold uppercase mb-2">Chemicals (Switzerland)</p>
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3 font-display">S/4HANA Migration</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-4">Complete S/4HANA migration for $2Bn specialty chemicals manufacturer, delivering 30% efficiency gains.</p>
+                    <div class="pt-3 border-t border-gray-200 dark:border-gray-700">
+                        <div class="text-hero-blue font-display font-semibold">30% Efficiency Gain</div>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-900 p-6 rounded-xl border-l-4 border-hero-green hover:shadow-lg transition-all transform hover:-translate-y-1">
+                    <p class="text-xs text-hero-green font-bold uppercase mb-2">Food Conglomerate (EU)</p>
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3 font-display">Migration & Consolidation</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-4">S/4HANA migration and consolidation for $3Bn EU food group across 12 entities.</p>
+                    <div class="pt-3 border-t border-gray-200 dark:border-gray-700">
+                        <div class="text-hero-green font-display font-semibold">12 Entities Unified</div>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-900 p-6 rounded-xl border-l-4 border-hero-lime hover:shadow-lg transition-all transform hover:-translate-y-1">
+                    <p class="text-xs text-hero-lime font-bold uppercase mb-2">Global Retail GCC</p>
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3 font-display">Multi-Tech Engagement</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-4">End-to-end technology support for large retail GCC across SAP, Data, and Cloud.</p>
+                    <div class="pt-3 border-t border-gray-200 dark:border-gray-700">
+                        <div class="text-hero-lime font-display font-semibold">40% Cost Reduction</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CLIENTS -->
+    <section id="clients" class="py-12 bg-gradient-to-r from-hero-navy to-blue-900 text-white border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <div>
+                    <div class="grid grid-cols-6 gap-2 md:gap-3">
+                        <div class="bg-white/10 p-2 rounded flex items-center justify-center h-12 hover:bg-white/20 transition"><img src="./img/cognizant.png" class="max-h-8 opacity-70 hover:opacity-100"></div>
+                        <div class="bg-white/10 p-2 rounded flex items-center justify-center h-12 hover:bg-white/20 transition"><img src="./img/DELOITEE.png" class="max-h-8 opacity-70 hover:opacity-100"></div>
+                        <div class="bg-white/10 p-2 rounded flex items-center justify-center h-12 hover:bg-white/20 transition"><img src="./img/tech mahindra.png" class="max-h-8 opacity-70 hover:opacity-100"></div>
+                        <div class="bg-white/10 p-2 rounded flex items-center justify-center h-12 hover:bg-white/20 transition"><img src="./img/tesco.jpg" class="max-h-8 opacity-70 hover:opacity-100"></div>
+                        <div class="bg-white/10 p-2 rounded flex items-center justify-center h-12 hover:bg-white/20 transition"><img src="./img/brandix.png" class="max-h-8 opacity-70 hover:opacity-100"></div>
+                        <div class="bg-white/10 p-2 rounded flex items-center justify-center h-12 hover:bg-white/20 transition text-xs text-gray-500">CLIENT</div>
+                        
+                        <div class="bg-white/10 p-2 rounded flex items-center justify-center h-12 hover:bg-white/20 transition text-xs text-gray-500">CLIENT</div>
+                        <div class="bg-white/10 p-2 rounded flex items-center justify-center h-12 hover:bg-white/20 transition text-xs text-gray-500">CLIENT</div>
+                        <div class="bg-white/10 p-2 rounded flex items-center justify-center h-12 hover:bg-white/20 transition text-xs text-gray-500">CLIENT</div>
+                        <div class="bg-white/10 p-2 rounded flex items-center justify-center h-12 hover:bg-white/20 transition text-xs text-gray-500">CLIENT</div>
+                        <div class="bg-white/10 p-2 rounded flex items-center justify-center h-12 hover:bg-white/20 transition text-xs text-gray-500">CLIENT</div>
+                        <div class="bg-white/10 p-2 rounded flex items-center justify-center h-12 hover:bg-white/20 transition text-xs text-gray-500">CLIENT</div>
+                    </div>
+                </div>
+
+                <div class="text-left">
+                    <h2 class="text-3xl font-bold mb-4 font-display">Trusted By Global Leaders</h2>
+                    <p class="text-gray-300 text-sm mb-6 leading-relaxed">
+                        We partner with industry giants across Retail, Banking, Manufacturing, and Healthcare to deliver transformative results. Our proven track record across 50+ clients and 100+ delivered projects speaks to our reliability and expertise.
+                    </p>
+                    
+                    <h3 class="text-lg font-bold mb-3 font-display text-hero-lime">Key Industries</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-semibold">🛒 Retail</span>
+                        <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-semibold">💳 BFS</span>
+                        <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-semibold">🏭 Manufacturing</span>
+                        <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-semibold">📡 Telecom</span>
+                        <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-semibold">🩺 Healthcare</span>
+                        <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-semibold">💻 Technology</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- INSIGHTS -->
+    <section id="insights" class="py-20 bg-white dark:bg-brand-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <h2 class="text-3xl font-extrabold font-display text-gray-900 dark:text-white">Insights</h2>
+                <p class="mt-2 text-gray-600 dark:text-gray-400">Thought leadership on SAP, Data, and Enterprise Transformation</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 dark:bg-gray-900 rounded-xl shadow-lg hover:shadow-2xl transition-all overflow-hidden" data-aos="fade-up">
+                    <div class="aspect-video bg-gradient-to-br from-hero-blue/20 to-hero-navy/20"></div>
+                    <div class="p-6">
+                        <div class="text-hero-blue text-xs font-display font-bold tracking-widest mb-3">BLOG</div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">S/4HANA Migration Best Practices</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Key considerations for successful enterprise migrations</p>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 dark:bg-gray-900 rounded-xl shadow-lg hover:shadow-2xl transition-all overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                    <div class="aspect-video bg-gradient-to-br from-hero-green/20 to-hero-lime/20"></div>
+                    <div class="p-6">
+                        <div class="text-hero-green text-xs font-display font-bold tracking-widest mb-3">WHITEPAPER</div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">Data Governance Framework</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Building enterprise-grade data foundations</p>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 dark:bg-gray-900 rounded-xl shadow-lg hover:shadow-2xl transition-all overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                    <div class="aspect-video bg-gradient-to-br from-brand-accent/20 to-brand-primary/20"></div>
+                    <div class="p-6">
+                        <div class="text-brand-accent text-xs font-display font-bold tracking-widest mb-3">PODCAST</div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 font-display">The Future of GCCs</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400">Executive perspectives on capability centers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LEADERSHIP POV -->
+    <section class="py-20 bg-gray-50 dark:bg-[#0b0212]">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="fade-up">
+            <svg class="w-12 h-12 text-hero-blue dark:text-brand-accent mx-auto mb-8" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+            </svg>
+            <blockquote class="text-2xl md:text-3xl font-display font-light leading-relaxed text-gray-800 dark:text-gray-200 mb-8">
+                "Enterprise transformation is not about technology alone—it's about enabling business outcomes through strategic advisory, governance, and execution excellence."
+            </blockquote>
+            <div class="text-hero-blue dark:text-brand-accent font-display font-semibold">CAREATOR LEADERSHIP</div>
+            <div class="text-sm text-gray-500 dark:text-gray-400 mt-2">Building Enterprise Futures</div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <footer id="contact" class="bg-gray-100 dark:bg-[#05010a] pt-20 border-t border-gray-200 dark:border-white/5 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-1 md:col-span-1">
+                    <h2 class="font-display font-bold text-2xl text-hero-navy dark:text-white mb-6">CAREATOR</h2>
+                    <p class="text-gray-600 dark:text-gray-500 text-sm mb-6 leading-relaxed">Expertise, reliability, and innovation in SAP solutions. Building long-term partnerships since 2011.</p>
+                </div>
+
+                <div class="col-span-1 md:col-span-2">
+                    <h3 class="text-gray-900 dark:text-white font-bold mb-6 font-display">Our Locations</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="text-hero-blue dark:text-brand-accent text-sm font-bold uppercase mb-2">Bengaluru (HQ)</h4>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm">SLJ Towers, 2nd Floor, Banashankari 3rd Stage, Bengaluru - 560085</p>
+                        </div>
+                        <div>
+                            <h4 class="text-hero-blue dark:text-brand-accent text-sm font-bold uppercase mb-2">Hyderabad</h4>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm">SR3 Towers, HITEC City, Hyderabad - 500081</p>
+                        </div>
+                        <div>
+                            <h4 class="text-hero-blue dark:text-brand-accent text-sm font-bold uppercase mb-2">USA & UK</h4>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm">Delaware, USA | London, UK</p>
+                        </div>
+                         <div>
+                            <h4 class="text-hero-blue dark:text-brand-accent text-sm font-bold uppercase mb-2">Global</h4>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm">Canada | EU | Middle East</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-span-1">
+                    <h3 class="text-gray-900 dark:text-white font-bold mb-6 font-display">Quick Links</h3>
+                    <ul class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+                        <li><a href="#solutions" class="hover:text-hero-blue dark:hover:text-brand-accent transition">Solutions</a></li>
+                        <li><a href="#services" class="hover:text-hero-blue dark:hover:text-brand-accent transition">Services</a></li>
+                        <li><a href="#industries" class="hover:text-hero-blue dark:hover:text-brand-accent transition">Industries</a></li>
+                        <li><a href="#insights" class="hover:text-hero-blue dark:hover:text-brand-accent transition">Insights</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-300 dark:border-white/5 py-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <p>&copy; 2025 Careator, All Rights Reserved.</p>
+                <div class="flex gap-4 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-hero-blue dark:hover:text-white">Privacy Policy</a>
+                    <a href="#" class="hover:text-hero-blue dark:hover:text-white">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // --- Preloader ---
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                    AOS.refresh(); 
+                }, 500);
+            }, 1500);
+        });
+
+        // --- Animations ---
+        AOS.init({
+            once: true,
+            offset: 50,
+            duration: 800,
+            easing: 'ease-out-cubic',
+        });
+
+        // --- Theme Toggle ---
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeToggleLightIcon.classList.remove('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                }
+            }
+        });
+
+        // --- Navbar Glass Effect ---
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                if(document.documentElement.classList.contains('dark')) {
+                     nav.style.backgroundColor = 'rgba(15, 5, 24, 0.9)';
+                } else {
+                     nav.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+                }
+                nav.classList.add('shadow-md');
+            } else {
+                nav.style.backgroundColor = 'transparent';
+                nav.classList.remove('shadow-md');
+            }
+        });
+    </script>
+</body>
+</html>
